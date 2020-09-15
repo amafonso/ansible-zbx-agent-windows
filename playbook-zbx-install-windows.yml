@@ -1,0 +1,8 @@
+---
+- name: Default Playbook - Starting Deploy
+  hosts: windows
+  roles:
+    - zbxinstallwindows
+    - zbxregisterhost
+
+...

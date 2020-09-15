@@ -1,0 +1,51 @@
+---
+### Dados do servico
+zbx_win_agent_service: "Zabbix Agent"
+zbx_win_folder_conf: 'C:\Program Files\Zabbix Agent\'
+zbx_win_agent_version: 4.2.8
+zbx_win_agent_versionconf: 4
+
+### Dados de conexão com o servico Zabbix
+zbx_agent_win_server: 191.235.239.26
+zbx_agent_win_serveractive: 191.235.239.26
+
+### Variaveis do Zabbix Agente Windows .conf
+## Tipo de logs
+zbx_agent_win_logtype: "file"
+
+## Tamanho da LOG em MB
+zbx_agent_win_LogFileSize: 1
+
+## Nivel de Debug 0 á 5
+zbx_agent_win_DebugLevel: 3
+
+##Liberar execução de comandos Agent Zabbix Version 5
+zbx_agent_win_commandremote: "AllowKey=system.run[*]"
+#zbx_agent_win_commandremote: "DenyKey=system.run[*]"
+
+##Habilitar logs quando for executado um comando (1 liberado - 0 Negado)
+zbx_agent_win_LogRemoteCommands: 1
+
+##Habilitar comandos remotos (1 liberado - 0 Negado)
+zbx_agent_win_RemoteCommands: 1
+
+##Instanceas aberta para processamento dos dados
+zbx_agent_win_StartAgents: 3
+
+## Timeout para execucao de rotina
+zbx_agent_win_Timeout: 30
+
+##Repositorio e .conf para monitoramento personalizado
+zbx_agent_win_Include: 'C:\Program Files\Zabbix Agent\zabbix_agentd.conf.d\*.conf'
+zbx_agent_win_Includefolder: 'C:\Program Files\Zabbix Agent\zabbix_agentd.conf.d\'
+
+##Repositorio de scritps
+zbx_agent_win_Scritps: 'C:\Program Files\Zabbix Agent\scripts\'
+
+##Repositorio de Logs
+zbx_agent_win_Logs: 'C:\Program Files\Zabbix Agent\zabbix_agentd.log'
+
+##Liberar caracter para informar argumentos e parametros (1 liberado - 0 Negado)
+zbx_agent_win_UnsafeUserParameters: 0
+
+...

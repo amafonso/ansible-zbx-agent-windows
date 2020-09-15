@@ -1,0 +1,20 @@
+---
+
+- name: Start Win Zabbix Agent
+  win_service:
+    name: "{{ zbx_win_agent_service }}"
+    state: started
+    start_mode: auto
+
+- name: Stop Win Zabbix Agent
+  win_service:
+    name: "{{ zbx_win_agent_service }}"
+    state: stopped
+    start_mode: auto
+
+- name: Restart Win Zabbix Agent
+  win_service:
+    name: "{{ zbx_win_agent_service }}"
+    state: restarted
+
+...

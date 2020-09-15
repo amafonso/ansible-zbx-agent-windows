@@ -1,0 +1,58 @@
+---
+# tasks file for roles/zbxrestartservice
+- name: Parar o serviço do Zabbix Agent
+  win_service:
+    name: "{{ item }}"
+    state: stopped
+  loop:
+    - "{{ zbx_win_agent_service  }}"
+
+- name: Copiando arquivos de configuracao - Agent V5
+  win_template:
+    src: zabbix_agentd_5.conf
+    dest: '{{ zbx_win_folder_conf }}\zabbix_agentd.conf'
+  when: zbx_win_agent_versionconf >= 5
+
+- name: Copiando arquivos de configuracao - Agent V4
+  win_template:
+    src: zabbix_agentd_4.conf
+    dest: '{{ zbx_win_folder_conf }}\zabbix_agentd.conf'
+  when: zbx_win_agent_versionconf <= 4
+
+- name: Criar pasta de scripts
+  win_file:
+    path: "{{ zbx_agent_win_Scritps }}"
+    state: directory
+
+- name: Copiar scripts PS1 para pasta
+  win_copy:
+    src: files/scripts
+    dest: '{{ zbx_win_folder_conf }}'
+
+- name: Copiar Parametros
+  win_copy:
+    src: files/zabbix_agentd.conf.d
+    dest: '{{ zbx_win_folder_conf }}'
+
+- name: Configurar restart do servico zabbix agent
+  win_shell: sc.exe failure "Zabbix Agent" actions= restart/5000/restart/10000/restart/20000 reset= 86400
+
+- name: Configurando Firewall do Windows
+  win_firewall_rule:
+    name: Allow Zabbix Agentd
+    localport: 10050-10051
+    action: allow
+    direction: in
+    protocol: tcp
+    state: present
+    enable: yes
+  notify: Start Win Zabbix Agent
+
+- name: Iniciar o serviço do Zabbix Agent
+  win_service:
+    name: "{{ item }}"
+    state: started
+  loop:
+    - "{{ zbx_win_agent_service  }}"
+
+...

@@ -1,0 +1,8 @@
+---
+# tasks file for roles/zbxrestartservice
+- name: Restart a service
+  win_service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - "{{ zbx_win_agent_service  }}"

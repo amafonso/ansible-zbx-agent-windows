@@ -1,0 +1,17 @@
+---
+# defaults file for zbxregisterhost/
+# Dados de acesso ao Zabbix
+zbx_server_url: 'http://hostname/zabbix/'
+zbx_login_user: Admin
+zbx_login_password: zabbix
+
+# Dados de Visualização
+zbx_host_groups: "grupo1"
+
+zbx_link_templates:
+ - "Template OS Windows Ativo"
+ - "Template OS Windows Discovery Performance Monitoring"
+
+zbx_status: enabled
+zbx_state: present
+

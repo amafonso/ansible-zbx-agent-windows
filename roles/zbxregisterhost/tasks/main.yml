@@ -1,0 +1,21 @@
+---
+# tasks file for zbxregisterhost/
+- name: Create a new host or update an existing host's info
+  local_action:
+    module: zabbix_host
+    server_url: "{{ zbx_server_url }}"
+    login_user: "{{ zbx_login_user }}"
+    login_password: "{{ zbx_login_password }}"
+    host_name: "{{ ansible_fqdn }}"
+    visible_name: "{{ ansible_fqdn }}"
+    host_groups: "{{ zbx_host_groups }}"
+    link_templates: "{{ zbx_link_templates }}"
+    status: "{{ zbx_status }}"
+    state: "{{ zbx_state }}"
+    interfaces:
+      - type: 1
+        main: 1
+        useip: 1
+        ip: "{{ ansible_ip_addresses[0] }}"
+        dns: ""
+        port: 10050
