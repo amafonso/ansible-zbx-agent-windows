@@ -27,16 +27,19 @@ Todas as configurações do .conf é feito pelo Default/main.yml, se precisa alt
 
 # Para o Ansible acessar o Servidores Windows, precisa ser executado o script abaixo como no Powershell como administrador:
 - Script disponibilizado no site: https://docs.ansible.com/ansible/latest/user_guide/windows_winrm.html, para habilitar a comunicação HTTPS
+'''$url = "https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Install-WMF3Hotfix.ps1"
+$file = "$env:temp\Install-WMF3Hotfix.ps1"
+(New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
+powershell.exe -ExecutionPolicy ByPass -File $file -Verbose
+
 
 $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
-
 $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
-
 (New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
-
 powershell.exe -ExecutionPolicy ByPass -File $file
+'''
 
 - A conexão com o servidores foi configurado como NTLM, dentro do repositório group_vars/windows, que esta fazendo referencia com o grupo Windows criado o arquivo de inventário hosts
 
-# Importante, tente usar o ansible-vault no arquivo group_vars/windows, para manter a segurança.
+### Importante, tente usar o ansible-vault no arquivo group_vars/windows, para manter a segurança.
 
